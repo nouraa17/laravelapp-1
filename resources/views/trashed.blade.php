@@ -11,7 +11,7 @@
 <body>
 @include('includes.nav')
 <div class="container">
-  <h2>Trashed Cars Rows</h2>
+  <h2>Trashed Cars</h2>
   <table class="table table-hover">
     <thead>
       <tr>

@@ -166,6 +166,7 @@ Route::post('storeCar', [CarController::class, 'store'])->name('storeCar');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Task5
 Route::get('editPost/{id}', [PostsController::class, 'edit'])->whereNumber('id');
+Route::get('showPost/{id}', [PostsController::class, 'show']);
 Route::put('updatePost/{id}', [PostsController::class, 'update'])->name('updatePost');
 
 ////////////////////////////////////////////Lec6///////////////////////////////////////////////////////////////
@@ -174,4 +175,10 @@ Route::get('trashedCar', [CarController::class, 'trashed']);
 Route::get('forceDelete/{id}', [CarController::class, 'forceDelete'])->name('forceDelete');
 Route::get('restoreCar/{id}', [CarController::class, 'restore']);
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Task6
+Route::get('deletePost/{id}', [PostsController::class, 'destroy']);
+Route::get('trashedPost', [PostsController::class, 'trashed']);
+Route::get('forceDeleteP/{id}', [PostsController::class, 'forceDelete']);
+Route::get('restorePost/{id}', [PostsController::class, 'restore']);
 

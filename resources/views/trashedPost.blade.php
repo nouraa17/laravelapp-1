@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Posts WebSite</title>
+    <title>PostsWebSite</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -13,32 +13,28 @@
 <body>
     @include('includes.navposts')
     <div class="container">
-        <h2>Posts Rows</h2>
+        <h2>Trashed Posts</h2>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Created at</th>
                     <th>Title</th>
                     <th>Author</th>
                     <th>Description</th>
                     <th>Published</th>
-                    <th>Edit</th>
-                    <th>Show</th>
+                    <th>Restore</th>
                     <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($posts as $post)
                 <tr>
-                    <td>{{$post['created_at']}}</td>
                     <td>{{$post['postTitle']}}</td>
                     <td>{{$post['author']}}</td>
                     <td>{{$post['description']}}</td>
                     <td>{{$post->published ? 'Yes' : 'No'}}</td>
-                    <td><a href="editPost/{{ $post->id }}">Edit</a></td>
-                    <td><a href="showPost/{{ $post->id }}">Show</a></td>
-                    <td><a href="deletePost/{{ $post->id }}"
-                            onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+                    <td><a href="restorePost/{{ $post->id }}">Restore Post</a></td>
+                    <td><a href="forceDeleteP/{{ $post->id }}"
+                            onclick="return confirm('Are you sure you want to delete?')">Force Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>

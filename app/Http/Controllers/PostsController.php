@@ -20,8 +20,8 @@ class PostsController extends Controller
     public function index()
     {
         //
-        $posts=Post::get();
-        return view('posts',compact('posts'));
+        $posts = Post::get();
+        return view('posts', compact('posts'));
     }
 
     /**
@@ -39,18 +39,29 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         //
-        $posts= new Post();
-        $posts->postTitle= $request->title;
-        $posts->author= $request->author;
-        $posts->description= $request->description;
-        if(isset($request->published)){
-            $posts->published = 1;
-        }else{
-            $posts->published = 0;
-        }
-        $posts->save();
-        return '<h1>Post Added Successfully</h1>';
-    
+        // $posts= new Post();
+        // $posts->postTitle= $request->title;
+        // $posts->author= $request->author;
+        // $posts->description= $request->description;
+        // if(isset($request->published)){
+        //     $posts->published = 1;
+        // }else{
+        //     $posts->published = 0;
+        // }
+        // $posts->save();
+        // return '<h1>Post Added Successfully</h1>';
+        //////////////////////////////////////////////////////////////////////////////////
+        //validation
+        $posts = $request->validate([
+            'postTitle' => 'required|string|max:50',
+            'author' => 'required|string',
+            'description' => 'required|string',
+        ]);
+        $posts = $request->only($this->columns);
+        $posts['published'] = isset($request->published);
+        Post::create($posts);
+        return redirect('posts');
+
     }
 
     /**
@@ -59,6 +70,8 @@ class PostsController extends Controller
     public function show(string $id)
     {
         //
+        $post = Post::findOrFail($id);
+        return view('viewPost', compact('post'));
     }
 
     /**
@@ -88,6 +101,24 @@ class PostsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Post::where('id', $id)->delete();
+        return redirect('posts');
+    }
+    public function trashed()
+    {
+        $posts = Post::onlyTrashed()->get();
+        return view('trashedPost', compact('posts'));
+    }
+
+    public function forceDelete(string $id)
+    {
+        Post::where('id', $id)->forceDelete();
+        return redirect('posts');
+    }
+
+    public function restore(string $id)
+    {
+        Post::where('id', $id)->restore();
+        return redirect('posts');
     }
 }

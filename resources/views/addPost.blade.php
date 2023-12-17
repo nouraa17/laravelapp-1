@@ -20,14 +20,29 @@
         <label for="title">Title:</label>
         <input type="text" class="form-control" id="title" placeholder="Enter title" name="postTitle">
       </div>
+      @error('postTitle')
+      <div style="color: red;">
+        {{ $message }}
+      </div>
+      @enderror
       <div class="form-group">
         <label for="author">Author:</label>
         <input type="text" class="form-control" id="author" placeholder="Enter author" name="author">
       </div>
+      @error('author')
+      <div style="color: red;">
+        {{ $message }}
+      </div>
+      @enderror
       <div class="form-group">
         <label for="description">description:</label>
         <textarea class="form-control" name="description" id="" cols="60" rows="3"></textarea>
       </div>
+      @error('description')
+      <div style="color: red;">
+        {{ $message }}
+      </div>
+      @enderror
       <div class="checkbox">
         <label><input type="checkbox" name="published"> Published me</label>
       </div>
