@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1>First View</h1>
+    <img src="{{ asset('assets/images/1.jpeg')}}">
 </body>
 </html>

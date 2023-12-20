@@ -14,9 +14,9 @@
   @include('includes.nav')
   <div class="container">
     <h2>Add new car data</h2>
-    <form action="{{route('storeCar')}}" method="post">
+    <form action="{{route('storeCar')}}" method="post" enctype="multipart/form-data">
       @csrf
-      <!-- @metho('put') -->
+      <!-- @method('put') -->
       <div class="form-group">
         <label for="title">Title:</label>
         <input type="text" class="form-control" id="title" placeholder="Enter title" name="title"
@@ -24,12 +24,12 @@
       </div>
       @error('title')
       <div style="color: red;">
-        {{ $message }}
+        {{ $message }} <!-- reserved word -->
       </div>
       @enderror
 
       <div class="form-group">
-        <label for="description">description:</label>
+        <label for="description">Description:</label>
         <textarea class="form-control" name="description" id="" cols="60" rows="3">{{old('description')}}</textarea>
       </div>
       @error('description')
@@ -37,10 +37,19 @@
         {{ $message }}
       </div>
       @enderror
-
+      <div class="form-group">
+        <label for="image">Image:</label>
+        <input type="file" class="form-control" name="image" id="image" ></input>
+      </div>
+      @error('image')
+      <div style="color: red;">
+        {{ $message }}
+      </div>
+      @enderror
       <div class="checkbox">
         <label><input type="checkbox" name="published"> Published me</label>
       </div>
+
       <button type="submit" class="btn btn-default">Insert</button>
     </form>
   </div>

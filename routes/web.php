@@ -80,9 +80,9 @@ Route::prefix('networks')->group(function () {
 // });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::get('/first', function () {
-    return view('test');
-});
+// Route::get('/first', function () {
+//     return view('test');
+// });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('/food', function () {
@@ -182,3 +182,13 @@ Route::get('trashedPost', [PostsController::class, 'trashed']);
 Route::get('forceDeleteP/{id}', [PostsController::class, 'forceDelete']);
 Route::get('restorePost/{id}', [PostsController::class, 'restore']);
 
+////////////////////////////////////////////Lec7///////////////////////////////////////////////////////////////
+
+Route::get('/first', function () {
+    return view('test');
+});
+
+Route::get('/upimg', function () {
+    return view('upimage');
+});
+Route::post('/imageUpload', [ExampleController::class, 'upload'])->name('imageUpload');

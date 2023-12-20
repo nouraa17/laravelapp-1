@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Traits\Common;
 
 class CarController extends Controller
 {
+    use Common;
     private $columns = [
         'title',
         'description',
@@ -61,12 +63,25 @@ class CarController extends Controller
         // Car::create($cars);
         // return redirect('cars');
         //////////////////////////////////////////////////////////////////////////
-        $cars=$request->validate([
-            'title'=>'required|string|max:50',
-            'description'=>'required|string',
-        ]);
+        // $messages=[
+        //     'title.required'=>'العنوان مطلوب',
+        //     // 'title.string'=>'Should be string',
+        //     'description.required'=> 'should be text',
+        //     ];
+        //////////////////////////////////////////////////////////////////////////
+
+        $messages = $this->messages();
+        $cars = $request->validate([
+            'title' => 'required|string|max:50',
+            'description' => 'required|string',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ], $messages); //
+
+        $fileName = $this->uploadFile($request->image, 'assets/images');
+
         $cars = $request->only($this->columns);
         $cars['published'] = isset($request->published);
+        $cars['image'] = $fileName;
         Car::create($cars);
         return redirect('cars');
     }
@@ -97,12 +112,57 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id) //request->form data ,, string->parameter from route
     {
+        // $cars = $request->only($this->columns);
+        // $cars['published'] = isset($request->published);
+        // Car::where('id', $id)->update($cars);
+        // return redirect('cars');
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        // $imup->validate([
+        //     'title' => 'required|string|max:50',
+        //     'description' => 'required|string',
+        //     'image' => 'nullable|mimes:png,jpg,jpeg|max:2048', // Allow empty image for updates
+        // ]);
+
+        // // Find the car to update
+        // // $car = Car::findOrFail($id);
+
+        // // Handle image update
+        // if ($imup->hasFile('image')) {
+        //     // Upload new image
+        //     $fileName = $this->uploadFile($request->image, 'assets/images');
+        //     // Delete the old image if needed, depending on your requirements
+        //     Car::delete('assets/images/' . $cars->image);
+        //     // Update the car with the new image
+        //     $cars->image = $fileName;
+        // }
+        //         $car['published'] = isset($request->published);
+
+
+        // Car::where('id', $id)->update($cars);
+
+        // // $car->save();
+
+        // return redirect('cars')->with('success', 'Car updated successfully');
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        $messages = $this->messages();
+        $cars = $request->validate([
+            'title' => 'required|string|max:50',
+            'description' => 'required|string',
+            'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+        ], $messages); //
         $cars = $request->only($this->columns);
+        if ($request->hasFile('image')) {
+            $fileName = $this->uploadFile($request->image, 'assets/images');
+
+            $cars['image'] = $fileName;
+        }
         $cars['published'] = isset($request->published);
         Car::where('id', $id)->update($cars);
-        return redirect('cars');
-
+        return redirect('cars')->with('success', 'Car updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -129,6 +189,18 @@ class CarController extends Controller
     {
         Car::where('id', $id)->restore();
         return redirect('cars');
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'عنوان السيارة مطلوب',
+            'title.string' => 'Should be string',
+            'description.required' => 'Should be text',
+            'image.required' => 'Please insert image',
+            'image.mimes' => 'Incorrect image type',
+            'image.max' => 'Image size exceeded the limit ',
+        ];
     }
 
 }
