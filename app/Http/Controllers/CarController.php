@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Traits\Common;
+use Illuminate\Support\Facades\Storage;
+
 
 class CarController extends Controller
 {
@@ -116,35 +118,6 @@ class CarController extends Controller
         // $cars['published'] = isset($request->published);
         // Car::where('id', $id)->update($cars);
         // return redirect('cars');
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        // $imup->validate([
-        //     'title' => 'required|string|max:50',
-        //     'description' => 'required|string',
-        //     'image' => 'nullable|mimes:png,jpg,jpeg|max:2048', // Allow empty image for updates
-        // ]);
-
-        // // Find the car to update
-        // // $car = Car::findOrFail($id);
-
-        // // Handle image update
-        // if ($imup->hasFile('image')) {
-        //     // Upload new image
-        //     $fileName = $this->uploadFile($request->image, 'assets/images');
-        //     // Delete the old image if needed, depending on your requirements
-        //     Car::delete('assets/images/' . $cars->image);
-        //     // Update the car with the new image
-        //     $cars->image = $fileName;
-        // }
-        //         $car['published'] = isset($request->published);
-
-
-        // Car::where('id', $id)->update($cars);
-
-        // // $car->save();
-
-        // return redirect('cars')->with('success', 'Car updated successfully');
-
-
         //////////////////////////////////////////////////////////////////////////////////////////
         $messages = $this->messages();
         $cars = $request->validate([
@@ -155,7 +128,6 @@ class CarController extends Controller
         $cars = $request->only($this->columns);
         if ($request->hasFile('image')) {
             $fileName = $this->uploadFile($request->image, 'assets/images');
-
             $cars['image'] = $fileName;
         }
         $cars['published'] = isset($request->published);
