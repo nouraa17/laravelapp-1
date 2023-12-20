@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //
         Schema::table('cars', function (Blueprint $table) {
             $table->string('image',100);
         });

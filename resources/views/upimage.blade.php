@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
     <form action="{{ route('imageUpload') }}" method="post" enctype="multipart/form-data">
     @csrf
         <input type="file" name="image">

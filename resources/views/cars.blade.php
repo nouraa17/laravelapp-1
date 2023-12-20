@@ -12,6 +12,7 @@
 
 <body>
   @include('includes.nav')
+
   @if(session('success'))
         <script>
             alert("{{ session('success') }}");

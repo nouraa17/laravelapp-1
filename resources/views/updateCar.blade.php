@@ -12,6 +12,7 @@
 
 <body>
   @include('includes.nav')
+  
   <div class="container">
     <h2>Update Car data</h2>
     <form action="{{route('updateCar',$car->id)}}" method="post" enctype="multipart/form-data">

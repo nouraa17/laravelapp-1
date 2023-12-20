@@ -143,9 +143,8 @@ class CarController extends Controller
         // // $car->save();
 
         // return redirect('cars')->with('success', 'Car updated successfully');
-
-
         //////////////////////////////////////////////////////////////////////////////////////////
+        //Task7
         $messages = $this->messages();
         $cars = $request->validate([
             'title' => 'required|string|max:50',

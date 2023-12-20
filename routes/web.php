@@ -183,7 +183,6 @@ Route::get('forceDeleteP/{id}', [PostsController::class, 'forceDelete']);
 Route::get('restorePost/{id}', [PostsController::class, 'restore']);
 
 ////////////////////////////////////////////Lec7///////////////////////////////////////////////////////////////
-
 Route::get('/first', function () {
     return view('test');
 });
@@ -191,4 +190,5 @@ Route::get('/first', function () {
 Route::get('/upimg', function () {
     return view('upimage');
 });
+//imageUpload
 Route::post('/imageUpload', [ExampleController::class, 'upload'])->name('imageUpload');
