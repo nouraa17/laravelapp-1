@@ -33,7 +33,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($cars as $car)
+        <!-- @foreach($cars as $car)
         <tr>
           <td>{{$car['title']}}</td>
           <td>{{$car['description']}}</td>
@@ -44,7 +44,9 @@
           <td><a href="deleteCar/{{ $car->id }}" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
           </td>
         </tr>
-        @endforeach
+        @endforeach -->
+        @each('.careach',$cars,'car')
+
       </tbody>
     </table>
   </div>

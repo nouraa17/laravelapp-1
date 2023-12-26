@@ -31,7 +31,7 @@
         <label for="image">Image:</label>
         <input type="file" class="form-control" name="image" id="image"></input>
         <br>
-        <img src="{{ asset('assets/images/'.$car->image)}}" width=300px>
+        <img src="{{ asset('assets/images/'.$car->image)}}" width=300px name="oldImage">
       </div>
       @error('image')
       <div style="color: red;">

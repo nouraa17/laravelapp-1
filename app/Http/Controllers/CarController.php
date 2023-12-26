@@ -149,16 +149,16 @@ class CarController extends Controller
         $cars = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required|string',
-            'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'nullable|mimes:png,jpg,jpeg|max:2048', //nullable or sometimes
         ], $messages); //
         $cars = $request->only($this->columns);
         if ($request->hasFile('image')) {
             $fileName = $this->uploadFile($request->image, 'assets/images');
-
             $cars['image'] = $fileName;
+            // unlink("assets/images/" . $request->oldImage); //to delete old image
         }
         $cars['published'] = isset($request->published);
-        Car::where('id', $id)->update($cars);
+        Car::where('id', $id)->update($cars); //where or findorfail
         return redirect('cars')->with('success', 'Car updated successfully');
     }
 

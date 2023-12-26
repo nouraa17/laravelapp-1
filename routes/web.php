@@ -192,3 +192,16 @@ Route::get('/upimg', function () {
 });
 //imageUpload
 Route::post('/imageUpload', [ExampleController::class, 'upload'])->name('imageUpload');
+////////////////////////////////////////////Lec8///////////////////////////////////////////////////////////////
+
+Route::get('/medi', function () {
+    return view('mediView');
+})->name('medi');
+
+Route::get('/404medi', function () {
+    return view('404');
+})->name('404medi');
+
+Route::get('/contactmedi', function () {
+    return view('contact');
+})->name('contactmedi');;
