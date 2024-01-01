@@ -14,10 +14,10 @@
   @include('includes.nav')
 
   @if(session('success'))
-        <script>
-            alert("{{ session('success') }}");
-        </script>
-    @endif
+  <script>
+    alert("{{ session('success') }}");
+  </script>
+  @endif
   <div class="container">
     <h2>Cars Rows</h2>
     <table class="table table-hover">
@@ -26,6 +26,7 @@
           <th>Title</th>
           <th>Description</th>
           <th>Image</th>
+          <th>Category</th>
           <th>Published</th>
           <th>Edit</th>
           <th>Show</th>
@@ -33,19 +34,20 @@
         </tr>
       </thead>
       <tbody>
-        <!-- @foreach($cars as $car)
+        @foreach($cars as $car)
         <tr>
           <td>{{$car['title']}}</td>
           <td>{{$car['description']}}</td>
           <td>{{$car['image']}}</td>
+          <td>{{$car->category ? $car->category->cat_name : 'N/A'}}</td>
+
           <td>{{$car->published ? 'Yes' : 'No'}}</td>
           <td><a href="editCar/{{ $car->id }}">Edit</a></td>
           <td><a href="showCar/{{ $car->id }}">Show</a></td>
           <td><a href="deleteCar/{{ $car->id }}" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
           </td>
         </tr>
-        @endforeach -->
-        @each('.careach',$cars,'car')
+        @endforeach
 
       </tbody>
     </table>

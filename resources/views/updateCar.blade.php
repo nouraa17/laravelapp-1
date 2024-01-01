@@ -12,7 +12,7 @@
 
 <body>
   @include('includes.nav')
-  
+
   <div class="container">
     <h2>Update Car data</h2>
     <form action="{{route('updateCar',$car->id)}}" method="post" enctype="multipart/form-data">
@@ -38,6 +38,21 @@
         {{ $message }}
       </div>
       @enderror
+
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <select name="category_id" id="category_id">
+          @foreach ($categories as $category)
+          <option value="{{ $category->id }}" {{ $category->id == $car->category_id ? 'selected' : '' }}>
+            {{ $category->cat_name }}
+          </option>
+          @endforeach
+        </select>
+        @error('category_id')
+        {{ $message }}
+        @enderror
+      </div>
+
       <div class="checkbox">
         <label><input type="checkbox" name="published" @checked($car->published)> Published me</label>
       </div>

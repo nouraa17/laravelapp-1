@@ -12,6 +12,7 @@
     <h3>
         <p>{{$car['description']}}</p>
     </h3>
+    <h3>{{$car->category['cat_name']}}</h3>
     <h3>{{$car['published'] ? "Published": "Not Published"}}</h3>
     <h3>{{$car['created_at']}}</h3>
     <h3>{{$car['updated_at']}}</h3>

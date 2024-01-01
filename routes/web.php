@@ -158,7 +158,7 @@ Route::post('/storePost', [PostsController::class, 'store'])->name('storePost');
 
 ////////////////////////////////////////////Lec5///////////////////////////////////////////////////////////////
 Route::get('cars', [CarController::class, 'index'])->name('cars');
-Route::get('createCar', [CarController::class, 'create']);
+Route::get('createCar', [CarController::class, 'create'])->name('createCar');
 Route::get('showCar/{id}', [CarController::class, 'show']);
 Route::get('editCar/{id}', [CarController::class, 'edit'])->whereNumber('id');
 Route::put('updateCar/{id}', [CarController::class, 'update'])->name('updateCar');
@@ -171,7 +171,7 @@ Route::put('updatePost/{id}', [PostsController::class, 'update'])->name('updateP
 
 ////////////////////////////////////////////Lec6///////////////////////////////////////////////////////////////
 Route::get('deleteCar/{id}', [CarController::class, 'destroy']);
-Route::get('trashedCar', [CarController::class, 'trashed']);
+Route::get('trashedCar', [CarController::class, 'trashed'])->name('trashedCar');
 Route::get('forceDelete/{id}', [CarController::class, 'forceDelete'])->name('forceDelete');
 Route::get('restoreCar/{id}', [CarController::class, 'restore']);
 

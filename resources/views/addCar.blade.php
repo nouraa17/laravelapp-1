@@ -12,7 +12,7 @@
 
 <body>
   @include('includes.nav')
-  
+
   <div class="container">
     <h2>Add new car data</h2>
     <form action="{{route('storeCar')}}" method="post" enctype="multipart/form-data">
@@ -40,13 +40,27 @@
       @enderror
       <div class="form-group">
         <label for="image">Image:</label>
-        <input type="file" class="form-control" name="image" id="image" ></input>
+        <input type="file" class="form-control" name="image" id="image"></input>
       </div>
       @error('image')
       <div style="color: red;">
         {{ $message }}
       </div>
       @enderror
+
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <select name="category_id" id="category_id">
+          <option value="">Select Category</option>
+          @foreach ($categories as $category)
+          <option value="{{$category->id}}">{{$category->cat_name}}</option>
+          @endforeach
+        </select>
+        @error('category_id')
+        {{ $message }}
+        @enderror
+      </div>
+
       <div class="checkbox">
         <label><input type="checkbox" name="published"> Published me</label>
       </div>
