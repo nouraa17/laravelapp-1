@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\CarController;
+Auth::routes(['verify'=>true]);
 
 /*
 |--------------------------------------------------------------------------
@@ -115,9 +116,9 @@ Route::prefix('blog')->group(function () {
 });
 ////////////////////////////////////////////Lec3///////////////////////////////////////////////////////////////
 
-Route::get('/login', function () {
-    return view('login');
-});
+// Route::get('/login', function () {
+//     return view('login');
+// });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Route::post('/logged', function () {
@@ -158,7 +159,7 @@ Route::post('/storePost', [PostsController::class, 'store'])->name('storePost');
 
 ////////////////////////////////////////////Lec5///////////////////////////////////////////////////////////////
 Route::get('cars', [CarController::class, 'index'])->name('cars');
-Route::get('createCar', [CarController::class, 'create'])->name('createCar');
+Route::get('createCar', [CarController::class, 'create'])->middleware('verified')->name('createCar');
 Route::get('showCar/{id}', [CarController::class, 'show']);
 Route::get('editCar/{id}', [CarController::class, 'edit'])->whereNumber('id');
 Route::put('updateCar/{id}', [CarController::class, 'update'])->name('updateCar');
@@ -205,3 +206,9 @@ Route::get('/404medi', function () {
 Route::get('/contactmedi', function () {
     return view('contact');
 })->name('contactmedi');;
+////////////////////////////////////////////Lec11///////////////////////////////////////////////////////////////
+
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

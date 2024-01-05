@@ -38,7 +38,8 @@
         <tr>
           <td>{{$car['title']}}</td>
           <td>{{$car['description']}}</td>
-          <td>{{$car['image']}}</td>
+          <!-- <td>{{$car['image']}}</td> -->
+          <td><img src="{{ asset('assets/images/'.$car->image)}}" width=100px alt="car"></td>
           <td>{{$car->category ? $car->category->cat_name : 'N/A'}}</td>
 
           <td>{{$car->published ? 'Yes' : 'No'}}</td>
