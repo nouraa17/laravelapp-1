@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactMediController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
@@ -212,3 +213,15 @@ Route::get('/contactmedi', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+////////////////////////////////////////////Lec12///////////////////////////////////////////////////////////////
+
+Route::get('testSession',[ExampleController::class,'createSession']);
+Route::get('dtestSession',[ExampleController::class,'deleteSession']);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Task12
+
+Route::post('/contactSubmit', [ContactMediController::class, 'submitForm'])->name('contactSubmit');
+Route::get('/em', function () {
+    return view('mail.contactForm');
+});

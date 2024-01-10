@@ -23,4 +23,19 @@ class ExampleController extends Controller
             return 'No file uploaded.';
         }
     }
+
+    public function createSession()
+    {
+        // session()->put('testSession', 'First Laravel session');
+        session()->flash('testSession', 'First Laravel session'); //session used one time
+        return 'Session Created '. session('testSession');
+
+    }
+    public function deleteSession()
+    {
+        session()->forget('testSession');
+        // session()->flush(); //delete all sessions
+        return 'Session Deleted ';
+
+    }
 }

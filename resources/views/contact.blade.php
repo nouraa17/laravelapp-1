@@ -3,24 +3,29 @@
 Contact Us
 @endsection
 @section('content')
-	<!-- Breadcrumbs -->
-    <div class="breadcrumbs overlay">
-			<div class="container">
-				<div class="bread-inner">
-					<div class="row">
-						<div class="col-12">
-							<h2>Contact Us</h2>
-							<ul class="bread-list">
-								<li><a href="medi">Home</a></li>
-								<li><i class="icofont-simple-right"></i></li>
-								<li class="active">Contact Us</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Breadcrumbs -->
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+<!-- Breadcrumbs -->
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Contact Us</h2>
+                    <ul class="bread-list">
+                        <li><a href="medi">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">Contact Us</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
 <!-- Start Contact Us -->
 <section class="contact-us section">
     <div class="container">
@@ -39,7 +44,8 @@ Contact Us
                         <h2>Contact With Us</h2>
                         <p>If you have any questions please fell free to contact with us.</p>
                         <!-- Form -->
-                        <form class="form" method="post" action="mail/mail.php">
+                        <form class="form" method="post" action="{{ route('contactSubmit') }}">
+                            @csrf
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -126,8 +132,8 @@ Contact Us
 @section('mapJs')
 <!-- Google Map API Key JS -->
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyDGqTyqoPIvYxhn_Sa7ZrK5bENUWhpCo0w"></script>
-	<!-- Gmaps JS -->
-	<script src="{{ asset('assets/js/gmaps.min.js')}}"></script>
-	<!-- Map Active JS -->
-	<script src="{{ asset('assets/js/map-active.js')}}"></script>
+<!-- Gmaps JS -->
+<script src="{{ asset('assets/js/gmaps.min.js')}}"></script>
+<!-- Map Active JS -->
+<script src="{{ asset('assets/js/map-active.js')}}"></script>
 @endsection
