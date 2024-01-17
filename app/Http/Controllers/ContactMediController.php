@@ -31,13 +31,13 @@ class ContactMediController extends Controller
             'subject' => 'required|string',
             'message' => 'required|string',
         ]);
-        // $formData = [
-        //     'name' => $request->input('name'),
-        //     'email' => $request->input('email'),
-        //     'phone' => $request->input('phone'),
-        //     'subject' => $request->input('subject'),
-        //     'message' => $request->input('message'),
-        // ];
+        $formData = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'subject' => $request->input('subject'),
+            'message' => $request->input('message'),
+        ];
         $formData = $request->only($this->columns);
         Contact::create($formData);
         $mail = new ContactMediMail($formData);

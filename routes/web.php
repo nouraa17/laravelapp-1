@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\CarController;
-Auth::routes(['verify'=>true]);
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+Auth::routes(['verify' => true]);
 
 /*
 |--------------------------------------------------------------------------
@@ -159,12 +161,25 @@ Route::post('/storePost', [PostsController::class, 'store'])->name('storePost');
 // });
 
 ////////////////////////////////////////////Lec5///////////////////////////////////////////////////////////////
-Route::get('cars', [CarController::class, 'index'])->name('cars');
-Route::get('createCar', [CarController::class, 'create'])->middleware('verified')->name('createCar');
-Route::get('showCar/{id}', [CarController::class, 'show']);
-Route::get('editCar/{id}', [CarController::class, 'edit'])->whereNumber('id');
-Route::put('updateCar/{id}', [CarController::class, 'update'])->name('updateCar');
-Route::post('storeCar', [CarController::class, 'store'])->name('storeCar');
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
+
+        Route::get('cars', [CarController::class, 'index'])->name('cars');
+        Route::get('createCar', [CarController::class, 'create'])->middleware('verified')->name('createCar');
+        Route::get('showCar/{id}', [CarController::class, 'show']);
+        Route::get('editCar/{id}', [CarController::class, 'edit'])->whereNumber('id');
+        Route::put('updateCar/{id}', [CarController::class, 'update'])->name('updateCar');
+        Route::post('storeCar', [CarController::class, 'store'])->name('storeCar');
+        Route::get('deleteCar/{id}', [CarController::class, 'destroy']);
+        Route::get('trashedCar', [CarController::class, 'trashed'])->name('trashedCar');
+        Route::get('forceDelete/{id}', [CarController::class, 'forceDelete'])->name('forceDelete');
+        Route::get('restoreCar/{id}', [CarController::class, 'restore']);
+    }
+);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Task5
 Route::get('editPost/{id}', [PostsController::class, 'edit'])->whereNumber('id');
@@ -172,10 +187,10 @@ Route::get('showPost/{id}', [PostsController::class, 'show']);
 Route::put('updatePost/{id}', [PostsController::class, 'update'])->name('updatePost');
 
 ////////////////////////////////////////////Lec6///////////////////////////////////////////////////////////////
-Route::get('deleteCar/{id}', [CarController::class, 'destroy']);
-Route::get('trashedCar', [CarController::class, 'trashed'])->name('trashedCar');
-Route::get('forceDelete/{id}', [CarController::class, 'forceDelete'])->name('forceDelete');
-Route::get('restoreCar/{id}', [CarController::class, 'restore']);
+// Route::get('deleteCar/{id}', [CarController::class, 'destroy']);
+// Route::get('trashedCar', [CarController::class, 'trashed'])->name('trashedCar');
+// Route::get('forceDelete/{id}', [CarController::class, 'forceDelete'])->name('forceDelete');
+// Route::get('restoreCar/{id}', [CarController::class, 'restore']);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Task6
@@ -206,7 +221,8 @@ Route::get('/404medi', function () {
 
 Route::get('/contactmedi', function () {
     return view('contact');
-})->name('contactmedi');;
+})->name('contactmedi');
+;
 ////////////////////////////////////////////Lec11///////////////////////////////////////////////////////////////
 
 // Auth::routes();
@@ -215,8 +231,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 ////////////////////////////////////////////Lec12///////////////////////////////////////////////////////////////
 
-Route::get('testSession',[ExampleController::class,'createSession']);
-Route::get('dtestSession',[ExampleController::class,'deleteSession']);
+Route::get('testSession', [ExampleController::class, 'createSession']);
+Route::get('dtestSession', [ExampleController::class, 'deleteSession']);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Task12
