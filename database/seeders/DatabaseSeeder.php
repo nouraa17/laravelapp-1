@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder
 
         ///////////////////////////////////////////////////////
 
-        // User::factory(10)->create();
-        Category::factory(10)->create();
-        Car::factory(20)->create();
-
+        User::factory(10)->create();
+        // Category::factory(10)->create();
+        // Car::factory(20)->create();
+        // Car::factory(20)->create();
 
     }
 }
