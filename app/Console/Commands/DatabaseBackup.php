@@ -28,7 +28,7 @@ class DatabaseBackup extends Command
      */
     public function handle()
     {
-
+        // https://www.itsolutionstuff.com/post/laravel-10-daily-weekly-monthly-automatic-database-backupexample.html'
         $filename = "backup-" . now()->format('Y-m-d') . ".gz";
     
         $command = env('DB_DUMP_BINARY_PATH') . " --user=" . env('DB_USERNAME') . " --password=" . env('DB_PASSWORD')
